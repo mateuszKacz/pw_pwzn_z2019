@@ -12,6 +12,13 @@ def parse_input(input):
     :return: list of parsed list of integers
     :rtype: list
     """
+    my_string = input
+    # strip from white spaces
+    my_string = my_string.strip()
+    my_string = list(filter(lambda x: x!=' ', my_string))
+    print(my_string)
+    
+
     pass
 
 
@@ -28,6 +35,7 @@ if __name__ == '__main__':
     
     
     """
-    assert parse_input(_input) == [
-        [1, 5], [1, 6, 7], [3, 2], [1, 10], [1, 10], [1, 6], [2, 5], [3, 2]
-    ]
+    parse_input(_input)
+    #assert parse_input(_input) == [
+      #  [1, 5], [1, 6, 7], [3, 2], [1, 10], [1, 10], [1, 6], [2, 5], [3, 2]
+    #]

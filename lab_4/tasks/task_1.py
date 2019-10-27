@@ -10,7 +10,7 @@ użyj wartość z pamięci kalkulatora. Obsłuż przypadki skrajne.
 
 class Calculator:
     def __init__(self):
-        self.memory = None
+        self.memory = None # ma być nie latwo odytowalne
         # Podpowiedz: użyj atrybutu do przechowywania wyniku
         # ostatniej wykonanej operacji, tak by metoda memorize przypisywała
         # wynik zapisany w tym atrybucie
@@ -49,5 +49,5 @@ if __name__ == '__main__':
     b = calc.run('+', 1, 2)
     calc.memorize()
     calc.in_memory()
-    c = calc.run('/', 9)
+    c = calc.run('/', 9) # wynik =3
     assert c == 3

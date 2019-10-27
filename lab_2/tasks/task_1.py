@@ -14,11 +14,24 @@ def counting_sort(values, _max, _min=0):
     :type _min: int
     :return:
     """
+    sorted_list = []
+
+    while values:
+
+        val = min(values)
+        i = values.count(val)
+
+        for x in range(i):
+            sorted_list.append(val)
+            values.remove(val)
+
+    return sorted_list
+
     pass
 
 
 if __name__ == '__main__':
     assert counting_sort(
         [99, 4, 33, 2, 2, 1, 65, 3, 97, 53],
-        100,
-    ) == [1, 2, 2, 3, 4, 33, 53, 65, 97, 99]
+        100) == [1, 2, 2, 3, 4, 33, 53, 65, 97, 99]
+

@@ -12,6 +12,26 @@ def stack_operation(stack_commands):
     :return: List of outputs from commands.
     :rtype: list
     """
+
+    my_list = []
+    list_max =[]
+
+    for command in stack_commands:
+
+        if command[0] == 'push':
+            try:
+                my_list.append(command[1])
+            except NameError:
+                continue
+        elif command[0] == 'pop':
+            my_list.pop()
+        elif command[0] == 'show_max':
+            list_max.append(max(my_list))
+        else:
+            continue
+
+    return list_max
+
     pass
 
 

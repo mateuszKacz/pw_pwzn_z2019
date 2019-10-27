@@ -1,5 +1,5 @@
 """
-Częśćć 1 (1 pkt): Uzupełnij klasę Vector tak by reprezentowała wielowymiarowy wektor.
+Część 1 (1 pkt): Uzupełnij klasę Vector tak by reprezentowała wielowymiarowy wektor.
 Klasa posiada przeładowane operatory równości, dodawania, odejmowania,
 mnożenia (przez liczbę i skalarnego), długości
 oraz nieedytowalny (własność) wymiar.

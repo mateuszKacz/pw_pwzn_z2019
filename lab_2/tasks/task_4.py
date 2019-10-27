@@ -8,6 +8,21 @@ def count_letters(msg):
     :return: Most frequent pair char - count in message.
     :rtype: list
     """
+
+    max_l = ('null', 0)
+
+    for letter in msg:
+
+        i = msg.count(letter)
+
+        if i > max_l[1]:
+            max_l = (letter, i)
+        elif i == max_l[1]:
+            if letter < max_l[0]:
+                max_l = (letter, i)
+
+    return max_l
+
     pass
 
 
