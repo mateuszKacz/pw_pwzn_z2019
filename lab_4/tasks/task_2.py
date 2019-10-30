@@ -13,8 +13,14 @@ Wszystkie metody sprawdzają wymiar.
 
 class Vector:
     dim = None  # Wymiar vectora
+
     def __init__(self, *args):
-        raise NotImplemented
+
+        self.vector = args
+
+    @classmethod
+    def vector_dim(self, vector):
+        dim = len(vector)
 
     @staticmethod
     def calculate_vector(beg, end):
@@ -43,7 +49,14 @@ class Vector:
         :return: New vector
         :rtype: tuple
         """
-        raise NotImplemented
+
+    def __add__(self, other):
+
+        for elem in range(len(self.vector)):
+
+            self.vector[elem] += other.vector[elem]
+
+        return self
 
 
 if __name__ == '__main__':
