@@ -1,5 +1,5 @@
 """
-Część 1 (1 pkt): Uzupełnij klasę Vector tak by reprezentowała wielowymiarowy wektor.
+Częśćć 1 (1 pkt): Uzupełnij klasę Vector tak by reprezentowała wielowymiarowy wektor.
 Klasa posiada przeładowane operatory równości, dodawania, odejmowania,
 mnożenia (przez liczbę i skalarnego), długości
 oraz nieedytowalny (własność) wymiar.
@@ -14,13 +14,12 @@ Wszystkie metody sprawdzają wymiar.
 class Vector:
     dim = None  # Wymiar vectora
 
+    @property
+    def len(self):
+        raise NotImplemented
+
     def __init__(self, *args):
-
-        self.vector = args
-
-    @classmethod
-    def vector_dim(self, vector):
-        dim = len(vector)
+        raise NotImplemented
 
     @staticmethod
     def calculate_vector(beg, end):
@@ -49,14 +48,7 @@ class Vector:
         :return: New vector
         :rtype: tuple
         """
-
-    def __add__(self, other):
-
-        for elem in range(len(self.vector)):
-
-            self.vector[elem] += other.vector[elem]
-
-        return self
+        raise NotImplemented
 
 
 if __name__ == '__main__':
@@ -66,6 +58,8 @@ if __name__ == '__main__':
     assert v1 - v2 == Vector(0,0,0)
     assert v1 * 2 == Vector(2,4,6)
     assert v1 * v2 == 14
-    assert len(Vector(3,4)) == 5.
+    assert len(Vector(3,4)) == 2
+    assert Vector(3,4).dim == 2
+    assert Vector(3,4).len == 5.
     assert Vector.calculate_vector([0, 0, 0], [1,2,3]) == (1,2,3)
     assert Vector.from_points([0, 0, 0], [1,2,3]) == Vector(1,2,3)
