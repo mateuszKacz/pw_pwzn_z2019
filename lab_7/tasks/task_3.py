@@ -37,7 +37,7 @@ def estimate_pi(n):
 
         if calc <= 1.:
             k += 1
-    
+
     return 4*k/n
 
 
