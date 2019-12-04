@@ -32,28 +32,11 @@ def calculate_neighbours(board):
 
     for i in range(r):
         for j in range(c):
-            if board[i][j]:
 
-                try:
-                    if j - 1 >= 0:
-                        neighbour_board[i][j-1] += 1
-                except ValueError:
-                    continue
-                try:
-                    if j + 1 < c:
-                        neighbour_board[i][j+1] += 1
-                except ValueError:
-                    continue
-                try:
-                    if i-1 >= 0:
-                        neighbour_board[i-1][j-1:j+1] += 1
-                except ValueError:
-                    continue
-                try:
-                    if 
-                    neighbour_board[i+1][j-1:j+1] += 1
-                except ValueError:
-                    continue
+            if (i > 0 and i < r -1) and (j > 0 and j < c - 1):
+
+                neighbour_board[i][j] = sum(board[i-1][j-1:j+1]) + sum(board[i+1][j-1:j+1]) + board[i][j-1] + board[i][j+1]
+
     print(neighbour_board)
 
     return neighbour_board
