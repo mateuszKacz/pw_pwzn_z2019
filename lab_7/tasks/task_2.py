@@ -30,14 +30,38 @@ def calculate_neighbours(board):
     # Inicjalizacja tablicy zerami
     neighbour_board = np.array([[0 for x in range(c)] for y in range(r)])
 
+
+    # wiem, ze bardzo brzydko
     for i in range(r):
         for j in range(c):
 
-            if (i > 0 and i < r -1) and (j > 0 and j < c - 1):
+            # przeliczenie dla "srodka" bez przegow
+            if (r -1 > i > 0) and (c - 1 > j > 0):
 
                 neighbour_board[i][j] = sum(board[i-1][j-1:j+2]) + sum(board[i+1][j-1:j+2]) + board[i][j-1] + board[i][j+1]
 
-    print(neighbour_board)
+            # brzeg gorny
+            elif i == 0 and (0 < j < c - 1):
+                neighbour_board[i][j] = sum(board[i+1][j-1:j+2]) + board[i][j-1] + board[i][j+1]
+            # brzeg dolny
+            elif i == r - 1 and (0 < j < c - 1):
+                neighbour_board[i][j] = sum(board[i-1][j-1:j+2]) + board[i][j-1] + board[i][j+1]
+            # brzeg lewy
+            elif j == 0 and (0 < i < r - 1):
+                neighbour_board[i][j] = sum(board[i+1][:2]) + sum(board[i-1][:2]) + board[i][j+1]
+            # brzeg prawy
+            elif j == c - 1 and (0 < i < r - 1):
+                neighbour_board[i][j] = sum(board[i+1][j-1:]) + sum(board[i-1][j-1:]) + board[i][j-1]
+            # rogi
+            if i == 0 and j == 0:
+                neighbour_board[i][j] = sum(board[i+1][:2]) + board[i][j+1]
+            elif i == 0 and j == c - 1:
+                neighbour_board[i][j] = sum(board[i+1][j-1:]) + board[i][j-1]
+            elif i == r-1 and j == 0:
+                neighbour_board[i][j] = sum(board[i-1][:2]) + board[i][j+1]
+            elif i == r-1 and j == c-1:
+                neighbour_board[i][j] = sum(board[i-1][j-1:]) + board[i][j-1]
+
 
     return neighbour_board
 
@@ -86,14 +110,14 @@ if __name__ == '__main__':
         [False,  True,  True,  True, False,  True]
     ])
     calculate_neighbours(_board)
-    # assert (calculate_neighbours(_board) == np.array([
-    #     [1, 2, 2, 1, 3, 1,],
-    #     [2, 4, 3, 4, 6, 3,],
-    #     [3, 5, 5, 3, 4, 3,],
-    #     [3, 3, 4, 4, 5, 2,],
-    #     [2, 4, 6, 3, 4, 2,],
-    #     [1, 1, 3, 2, 3, 0,],
-    # ])).all()
+    assert (calculate_neighbours(_board) == np.array([
+        [1, 2, 2, 1, 3, 1,],
+        [2, 4, 3, 4, 6, 3,],
+        [3, 5, 5, 3, 4, 3,],
+        [3, 3, 4, 4, 5, 2,],
+        [2, 4, 6, 3, 4, 2,],
+        [1, 1, 3, 2, 3, 0,],
+    ])).all()
     # assert (iterate(_board) == np.array([
     #     [False, False, False, False, True, False],
     #     [ True, False,  True, False, False,  True],
