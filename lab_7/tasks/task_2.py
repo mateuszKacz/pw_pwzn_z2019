@@ -35,7 +35,7 @@ def calculate_neighbours(board):
 
             if (i > 0 and i < r -1) and (j > 0 and j < c - 1):
 
-                neighbour_board[i][j] = sum(board[i-1][j-1:j+1]) + sum(board[i+1][j-1:j+1]) + board[i][j-1] + board[i][j+1]
+                neighbour_board[i][j] = sum(board[i-1][j-1:j+2]) + sum(board[i+1][j-1:j+2]) + board[i][j-1] + board[i][j+1]
 
     print(neighbour_board)
 
