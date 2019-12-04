@@ -90,12 +90,15 @@ def iterate(board):
     # Sprawdzanie liczby sasiadow danej komorki i aplikacja mechaniki gry
     for i in range(len(neighbours)):
         for j in range(len(neighbours[0])):
-            if neighbours[i][j] >= 3:
-                board[i][j] = True
+            if neighbours[i][j] > 3:
+                board[i][j] = False
             elif neighbours[i][j] < 2:
                 board[i][j] = False
+            elif neighbours[i][j] == 3:
+                board[i][j] = True
             else:
                 continue
+                
     return board
 
 
