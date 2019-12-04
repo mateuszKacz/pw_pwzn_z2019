@@ -1,5 +1,5 @@
 """
-Częśćć 1 (1 pkt): Uzupełnij klasę Vector tak by reprezentowała wielowymiarowy wektor.
+Część 1 (1 pkt): Uzupełnij klasę Vector tak by reprezentowała wielowymiarowy wektor.
 Klasa posiada przeładowane operatory równości, dodawania, odejmowania,
 mnożenia (przez liczbę i skalarnego), długości
 oraz nieedytowalny (własność) wymiar.
@@ -19,7 +19,12 @@ class Vector:
         raise NotImplemented
 
     def __init__(self, *args):
-        raise NotImplemented
+
+        self.vector = args
+
+    @classmethod
+    def vector_dim(self, vector):
+        dim = len(vector)
 
     @staticmethod
     def calculate_vector(beg, end):
@@ -48,7 +53,14 @@ class Vector:
         :return: New vector
         :rtype: tuple
         """
-        raise NotImplemented
+
+    def __add__(self, other):
+
+        for elem in range(len(self.vector)):
+
+            self.vector[elem] += other.vector[elem]
+
+        return self
 
 
 if __name__ == '__main__':

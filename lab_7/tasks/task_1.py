@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def least_sq(xy):
@@ -17,7 +18,17 @@ def least_sq(xy):
     :type xy: np.ndarray
     :return: Tuple of fitted parameters
     """
-    pass
+    sum_x = sum(xy[0])
+    sum_y = sum(xy[1])
+    sum_xy = sum(xy[0]*xy[1])
+    n = len(xy[0])
+
+    delta = ((n * sum([x**2 for x in xy[0]])) - (sum_x ** 2))
+    a = (((n * sum_xy) - (sum_x * sum_y)) / delta)
+    b = ((sum([x ** 2 for x in xy[0]]) * sum_y) - (sum_x * sum_xy)) / delta
+    print(a)
+    print(b)
+    return a, b
 
 
 if __name__ == '__main__':
@@ -221,4 +232,4 @@ if __name__ == '__main__':
                         98.00343145869182,
                         98.9982680433363,
                         100.00083927400149]])
-    np.testing.assert_allclose(least_sq(points), (1, -1), atol=0.1)
+    np.testing.assert_allclose(least_sq(points), (1, 1), atol=0.1)
