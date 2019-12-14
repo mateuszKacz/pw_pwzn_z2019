@@ -1,5 +1,6 @@
 import tkinter as tk
 from functools import partial
+import pygame as pg
 
 from lab_9.tools.calculator import Calculator
 
@@ -11,12 +12,19 @@ class CalculatorGUI(tk.Frame):
         self.variables = {}
         self.state = tk.BooleanVar(value=True)
         self.init_variables()
-        self.calculator = Calculator()
+        self.calculator = Calculator(self)
 
         self.screen = tk.Label(self, bg='white')
         self.screen.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.bottom_pad = self.init_bottom_pad()
         self.bottom_pad.pack(side=tk.BOTTOM)
+
+        # oblsuga klawiatury
+        pg.init()
+        pg.display.init()
+        pg.display.set_mode((1,1))
+        self.check_key()
+
 
     def init_variables(self):
         self.variables['var_1'] = ''
@@ -26,6 +34,15 @@ class CalculatorGUI(tk.Frame):
 
     def init_bottom_pad(self):
         bottom_pad = tk.Frame(self)
+
+        functions_pad = tk.Frame(bottom_pad)
+        functions_pad.pack(side=tk.LEFT)
+
+        # klwiatura funckcji
+        MC_b = tk.Button(functions_pad, text='MC', width=5, command=self.calculator.clean_memory).grid(row=0, column=0)
+        MR_b = tk.Button(functions_pad, text='MR', width=5, command=self.calculator.in_memory).grid(row=1, column=0)
+        Mplus_b = tk.Button(functions_pad, text='M+', width=5, command=self.calculator.memorize).grid(row=2, column=0)
+        clear_b = tk.Button(functions_pad, text='C', width=5, command=self.clear).grid(row=4, column=0)
 
         # klawiatura numeryczna
         num_pad = tk.Frame(bottom_pad)
@@ -38,8 +55,8 @@ class CalculatorGUI(tk.Frame):
             ).grid(row=ii // 3, column=(2-ii) % 3)
         ii += 1
         tk.Button(
-            num_pad, text='C', width=5,
-            command=self.clear
+            num_pad, text='.', width=5,
+            command=partial(self.update_var, '.')
         ).grid(row=ii // 3, column=ii % 3)
         ii += 1
         tk.Button(
@@ -97,12 +114,52 @@ class CalculatorGUI(tk.Frame):
 
     def calculate_result(self):
         if self.variables['var_1'] and self.variables['var_2']:
-            var_1 = int(self.variables['var_1'])
-            var_2 = int(self.variables['var_2'])
+            var_1 = float(self.variables['var_1'])
+            var_2 = float(self.variables['var_2'])
             self.screen['text'] = self.calculator.run(
                 self.variables['operator'], var_1, var_2
             )
             self.init_variables()
+
+    def check_key(self):
+        """Funckja obluguje klawiature"""
+        events = pg.event.get()
+
+        for event in events:
+            if event.type == pg.KEYDOWN:
+
+                if event.key == pg.K_0:
+                    self.update_var(0)
+                elif event.key == pg.K_1:
+                    self.update_var(1)
+                elif event.key == pg.K_2:
+                    self.update_var(2)
+                elif event.key == pg.K_3:
+                    self.update_var(3)
+                elif event.key == pg.K_4:
+                    self.update_var(4)
+                elif event.key == pg.K_5:
+                    self.update_var(5)
+                elif event.key == pg.K_6:
+                    self.update_var(6)
+                elif event.key == pg.K_7:
+                    self.update_var(7)
+                elif event.key == pg.K_8:
+                    self.update_var(8)
+                elif event.key == pg.K_9:
+                    self.update_var(9)
+                elif event.key == pg.K_ASTERISK:
+                    self.set_operator('*')
+                elif event.key == pg.K_SLASH:
+                    self.set_operator('/')
+                elif event.key == pg.K_PLUS:
+                    self.set_operator('+')
+                elif event.key == pg.K_MINUS:
+                    self.set_operator('-')
+                else:
+                    print('Wrong key!')
+
+        self.after(500, func=self.check_key)
 
 
 if __name__ == '__main__':

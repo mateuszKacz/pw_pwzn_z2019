@@ -1,4 +1,4 @@
-## 1. (1 pkt):
+`````## 1. (1 pkt):
 Dodaj przycisk `.` i możliwość wprowadzania liczb zmiennoprzecinkowych.
 ## 2. (2 pkt):
 Dodaj obsługę pamięci: przyciski `MC` (wyczyść pamięć), `MR` (wczytaj z pamięci)

@@ -24,10 +24,16 @@ class Calculator:
         '*': mul,
         '/': truediv,
     }
+    functions = {
+        'MC': 'clean_memory',
+        'MR': 'in_memory',
+        'M+': 'memorize',
+    }
 
-    def __init__(self):
+    def __init__(self, gui):
         self._memory = None
         self._short_memory = None
+        self.gui = gui
 
     @staticmethod
     def _cast_to_num(val):
@@ -82,7 +88,11 @@ class Calculator:
 
     def in_memory(self):
         """Prints memorized value."""
-        print(f"Zapamiętana wartość: {self.memory}")
+        if self.gui.variables['var_1'] and self.gui.variables['operator']:
+            self.gui.variables['var_2'] = self.memory
+        else:
+            self.gui.variables['var_1'] = self.memory
+        self.gui.update_screen()
 
 
 if __name__ == '__main__':
