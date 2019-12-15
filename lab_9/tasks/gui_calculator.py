@@ -156,10 +156,12 @@ class CalculatorGUI(tk.Frame):
                     self.set_operator('+')
                 elif event.key == pg.K_MINUS:
                     self.set_operator('-')
+                elif event.key == pg.K_KP_ENTER:
+                    self.calculate_result()
                 else:
                     print('Wrong key!')
 
-        self.after(500, func=self.check_key)
+        self.after(100, func=self.check_key)
 
 
 if __name__ == '__main__':
