@@ -22,7 +22,7 @@ class CalculatorGUI(tk.Frame):
         # oblsuga klawiatury
         pg.init()
         pg.display.init()
-        pg.display.set_mode((1,1))
+        pg.display.set_mode((1, 1))
         self.check_key()
 
 
