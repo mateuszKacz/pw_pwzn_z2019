@@ -4,6 +4,30 @@ from time import time
 
 
 def log_run(fun):
+    
+    @wraps(fun)
+    def wrapper(*args, **kwargs):
+        start = time()
+        ret = fun(*args, **kwargs)
+        end = time()
+        fun_time = end - start
+        print(datetime.now().strftime('%Y-%m-%dT%H:%M:%S|') + ' function ' + str(fun.__name__) + ' called with:')
+        count_pos_params = len(args)
+        count_opt_args = len(kwargs)
+
+        print(f'{count_pos_params} positional parameters')
+        if count_opt_args > 0:
+            opts = ''
+            keys = kwargs.keys()
+            for key in keys:
+                opts += key + ' '
+            print(f'optional parameters: {opts}')
+        else:
+            print(f'optional parameters: -')
+
+        print(f'returned: {ret} ({fun_time}s)')
+        return ret
+    return wrapper
     pass
 
 

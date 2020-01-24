@@ -1,5 +1,22 @@
 def generate_fibonacci(n=100):
-    pass
+
+    n_0 = 0
+    n_1 = 1
+
+    if isinstance(n, int) and (0 < n <= 100):
+
+        for i in range(n):
+            if i == 0:
+                yield n_0
+            elif i == 1:
+                yield n_1
+            else:
+                n = n_1 + n_0
+                yield n
+                n_0 = n_1
+                n_1 = n
+    else:
+        raise RuntimeError("n is not integer value")
 
 
 if __name__ == '__main__':
